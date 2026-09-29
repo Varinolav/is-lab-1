@@ -179,6 +179,14 @@ function Editor({ kind, item, references, onClose, onSaved }) {
 
   async function submit(event) {
     event.preventDefault();
+    if (kind === 'coordinates' && Number(form.x) <= -59) {
+      setError('Координата X должна быть больше -59.');
+      return;
+    }
+    if (kind === 'persons' && form.height !== '' && Number(form.height) <= 0) {
+      setError('Рост должен быть больше 0.');
+      return;
+    }
     setSaving(true);
     setError('');
     try {
@@ -237,16 +245,16 @@ function Editor({ kind, item, references, onClose, onSaved }) {
             options={referenceOptions(references.locations, locationLabel)} required />
           <SelectField label="Цвет глаз" value={form.eyeColor} onChange={set('eyeColor')} options={enumOptions(colors)} />
           <SelectField label="Цвет волос" value={form.hairColor} onChange={set('hairColor')} options={enumOptions(colors)} />
-          <Field label="Рост"><input {...input('height', 'number', { min: 1, step: 1 })} /></Field>
+          <Field label="Рост"><input {...input('height', 'number', { step: 'any' })} /></Field>
           <SelectField label="Страна" value={form.nationality} onChange={set('nationality')} options={enumOptions(countries)} />
         </div>}
         {kind === 'coordinates' && <div className="form-grid">
-          <Field label="X *"><input {...input('x', 'number', { min: -58, step: 1, required: true })} /></Field>
+          <Field label="X *" hint="Больше -59"><input {...input('x', 'number', { step: 'any', required: true })} /></Field>
           <Field label="Y *"><input {...input('y', 'number', { step: 'any', required: true })} /></Field>
         </div>}
         {kind === 'locations' && <div className="form-grid">
           <Field label="X *"><input {...input('x', 'number', { step: 1, required: true })} /></Field>
-          <Field label="Y *"><input {...input('y', 'number', { step: 1, required: true })} /></Field>
+          <Field label="Y *"><input {...input('y', 'number', { step: 'any', required: true })} /></Field>
           <Field label="Z *"><input {...input('z', 'number', { step: 'any', required: true })} /></Field>
           <Field label="Название"><input {...input('name', 'text', { maxLength: 255 })} /></Field>
         </div>}

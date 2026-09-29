@@ -12,10 +12,10 @@ import lombok.Setter;
 public class Location {
     private Long id;
 
-    private long x;
+    private int x;
 
     @NotNull
-    private Integer y;
+    private Double y;
 
     private double z;
 

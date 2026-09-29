@@ -3,8 +3,8 @@
 <hibernate-mapping>
     <class name="ru.varino.lab1.entity.Location" table="location" check="name IS NULL OR length(name) > 0">
         <id name="id" type="java.lang.Long"><generator class="identity"/></id>
-        <property name="x" type="long" not-null="true"/>
-        <property name="y" type="java.lang.Integer" not-null="true"/>
+        <property name="x" type="int" not-null="true"/>
+        <property name="y" type="java.lang.Double" not-null="true"/>
         <property name="z" type="double" not-null="true"/>
         <property name="name" type="string"/>
     </class>

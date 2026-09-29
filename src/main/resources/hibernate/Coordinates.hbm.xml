@@ -3,7 +3,7 @@
 <hibernate-mapping>
     <class name="ru.varino.lab1.entity.Coordinates" table="coordinates" check="x > -59">
         <id name="id" type="java.lang.Long"><generator class="identity"/></id>
-        <property name="x" type="java.lang.Integer" not-null="true"/>
+        <property name="x" type="java.lang.Double" not-null="true"/>
         <property name="y" type="float" not-null="true"/>
     </class>
 </hibernate-mapping>

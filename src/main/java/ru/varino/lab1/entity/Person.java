@@ -1,9 +1,9 @@
 package ru.varino.lab1.entity;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +14,8 @@ import lombok.Setter;
 public class Person {
     private Long id;
 
-    @NotBlank
+    @NotNull
+    @Size(min = 1)
     private String name;
 
     private Color eyeColor;
@@ -26,7 +27,7 @@ public class Person {
     private Location location;
 
     @Positive
-    private Integer height;
+    private Double height;
 
     private Country nationality;
 }

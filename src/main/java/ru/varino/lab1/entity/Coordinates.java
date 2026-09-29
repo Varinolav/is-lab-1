@@ -1,6 +1,6 @@
 package ru.varino.lab1.entity;
 
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +13,8 @@ public class Coordinates {
     private Long id;
 
     @NotNull
-    @Min(-58)
-    private Integer x;
+    @DecimalMin(value = "-59", inclusive = false)
+    private Double x;
 
     private float y;
 }
