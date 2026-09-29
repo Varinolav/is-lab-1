@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ru.varino.lab1.entity.Location" table="location" check="name IS NULL OR length(name) > 0">
+        <id name="id" type="java.lang.Long"><generator class="identity"/></id>
+        <property name="x" type="long" not-null="true"/>
+        <property name="y" type="java.lang.Integer" not-null="true"/>
+        <property name="z" type="double" not-null="true"/>
+        <property name="name" type="string"/>
+    </class>
+</hibernate-mapping>

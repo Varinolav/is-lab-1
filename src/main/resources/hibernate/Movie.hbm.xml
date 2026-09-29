@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ru.varino.lab1.entity.Movie" table="movie"
+           check="id > 0 AND length(trim(name)) > 0 AND oscars_count >= 0
+                  AND mpaa_rating IN ('G', 'R', 'PG_13', 'NC_17')
+                  AND (budget IS NULL OR budget > 0)
+                  AND (total_box_office IS NULL OR total_box_office > 0)
+                  AND (length IS NULL OR length > 0)
+                  AND (golden_palm_count IS NULL OR golden_palm_count > 0)">
+        <id name="id" type="java.lang.Integer"><generator class="identity"/></id>
+        <property name="name" type="string" not-null="true"/>
+        <many-to-one name="coordinates" class="ru.varino.lab1.entity.Coordinates" column="coordinates_id" not-null="true" lazy="false"/>
+        <property name="creationDate" column="creationdate" type="java.time.LocalDateTime" not-null="true" update="false"/>
+        <property name="oscarsCount" column="oscars_count" type="int" not-null="true"/>
+        <property name="budget" type="java.lang.Long"/>
+        <property name="totalBoxOffice" column="total_box_office" type="java.lang.Long"/>
+        <property name="mpaaRating" column="mpaa_rating" not-null="true">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">ru.varino.lab1.entity.MpaaRating</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+        <many-to-one name="director" class="ru.varino.lab1.entity.Person" column="director_id" not-null="true" lazy="false"/>
+        <many-to-one name="screenwriter" class="ru.varino.lab1.entity.Person" column="screenwriter_id" lazy="false"/>
+        <many-to-one name="operator" class="ru.varino.lab1.entity.Person" column="operator_id" not-null="true" lazy="false"/>
+        <property name="length" type="java.lang.Long"/>
+        <property name="goldenPalmCount" column="golden_palm_count" type="java.lang.Integer"/>
+        <property name="genre">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">ru.varino.lab1.entity.MovieGenre</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+    </class>
+</hibernate-mapping>
