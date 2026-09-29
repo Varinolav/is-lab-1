@@ -22,24 +22,24 @@ public class MovieOperationRepository {
     public Integer deleteOneByGenre(MovieGenre genre) {
         Session session = session();
         session.flush();
-        Number id = (Number) session.createNativeQuery("SELECT lab_delete_one_movie_by_genre(:genre)")
+        Integer id = session.createNativeQuery("SELECT lab_delete_one_movie_by_genre(:genre)", Integer.class)
                 .setParameter("genre", genre.name())
                 .getSingleResult();
         session.clear();
-        return id == null ? null : id.intValue();
+        return id;
     }
 
     public long sumGoldenPalms() {
-        Number sum = (Number) session().createNativeQuery("SELECT lab_sum_golden_palms()")
+        Long sum = session().createNativeQuery("SELECT lab_sum_golden_palms()", Long.class)
                 .getSingleResult();
-        return sum.longValue();
+        return sum;
     }
 
     public long countGenreBefore(MovieGenre genre) {
-        Number count = (Number) session().createNativeQuery("SELECT lab_count_movies_genre_before(:genre)")
+        Long count = session().createNativeQuery("SELECT lab_count_movies_genre_before(:genre)", Long.class)
                 .setParameter("genre", genre.name())
                 .getSingleResult();
-        return count.longValue();
+        return count;
     }
 
     public List<Movie> moviesWithoutOscars() {
@@ -50,9 +50,9 @@ public class MovieOperationRepository {
     public int addOscarToRMovies() {
         Session session = session();
         session.flush();
-        Number count = (Number) session.createNativeQuery("SELECT lab_add_oscar_to_r_movies()")
+        Integer count = session.createNativeQuery("SELECT lab_add_oscar_to_r_movies()", Integer.class)
                 .getSingleResult();
         session.clear();
-        return count.intValue();
+        return count;
     }
 }

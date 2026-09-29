@@ -90,7 +90,7 @@ async function api(path, options = {}) {
   const raw = await response.text();
   let data = raw;
   if (raw) {
-    try { data = JSON.parse(raw); } catch { /* RESTEasy may return plain text. */ }
+    try { data = JSON.parse(raw); } catch {}
   }
   if (!response.ok) {
     if (response.status === 404) throw new Error('Объект не найден. Обновите список.');

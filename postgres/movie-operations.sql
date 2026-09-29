@@ -1,5 +1,3 @@
--- Apply after the Hibernate-managed movie table exists.
--- Re-running this script replaces the functions without changing movie data.
 BEGIN;
 
 CREATE OR REPLACE FUNCTION lab_delete_one_movie_by_genre(p_genre text)

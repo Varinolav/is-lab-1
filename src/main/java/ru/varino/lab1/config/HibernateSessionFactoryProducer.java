@@ -16,17 +16,15 @@ public class HibernateSessionFactoryProducer {
     @Produces
     @ApplicationScoped
     public SessionFactory sessionFactory() {
-        if (sessionFactory == null) {
-            Configuration configuration = new Configuration().configure()
-                    .addResource("hibernate/Coordinates.hbm.xml")
-                    .addResource("hibernate/Location.hbm.xml")
-                    .addResource("hibernate/Person.hbm.xml")
-                    .addResource("hibernate/Movie.hbm.xml");
-            registry = new StandardServiceRegistryBuilder()
-                    .applySettings(configuration.getProperties())
-                    .build();
-            sessionFactory = configuration.buildSessionFactory(registry);
-        }
+        Configuration configuration = new Configuration().configure()
+                .addResource("hibernate/Coordinates.hbm.xml")
+                .addResource("hibernate/Location.hbm.xml")
+                .addResource("hibernate/Person.hbm.xml")
+                .addResource("hibernate/Movie.hbm.xml");
+        registry = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties())
+                .build();
+        sessionFactory = configuration.buildSessionFactory(registry);
         return sessionFactory;
     }
 
